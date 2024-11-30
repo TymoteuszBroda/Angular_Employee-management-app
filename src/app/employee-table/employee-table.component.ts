@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-employee-table',
+  selector: 'employee-table',
   standalone: true,
   imports: [],
   templateUrl: './employee-table.component.html',
-  styleUrl: './employee-table.component.css'
+  styleUrl: './employee-table.component.css',
 })
-export class EmployeeTableComponent {
-
-}
+export class EmployeeTableComponent {}
