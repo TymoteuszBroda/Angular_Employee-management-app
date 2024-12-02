@@ -18,4 +18,9 @@ export class EmployeeFormComponent {
     email: '',
     position: ''
   }
+
+  onSubmit(): void
+  {
+    console.log(this.employee);
+  }
 }
