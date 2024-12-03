@@ -28,4 +28,8 @@ export class EmployeeService {
   {
     return this.http.get<Employee>(`${this.apiUrl}/${id}`);
   }
+  editEmployee(employee: Employee) : Observable<Employee>
+  {
+    return this.http.put<Employee>(`${this.apiUrl}/${employee.id}`, employee );
+  }
 }

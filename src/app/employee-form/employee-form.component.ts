@@ -58,6 +58,9 @@ ngOnInit(): void {
 
   onSubmit(): void
   {
+
+    if(!this.isEditing)
+    {
     console.log(this.employee);
     this.employeeService.createEmployee(this.employee).subscribe({
       next: (response) => {
@@ -66,8 +69,21 @@ ngOnInit(): void {
       error: (err) =>
       {
         console.error(err);
-        this.errorMessage = `Error: ${err.status} - ${err.message}`;
+        this.errorMessage = `Error during create: ${err.status} - ${err.message}`;
       }
     });
+  }else
+  {
+        console.log(this.employee);
+        this.employeeService.editEmployee(this.employee).subscribe({
+          next: (response) => {
+            this.router.navigate(['/']);
+          },
+          error: (err) => {
+            console.error(err);
+            this.errorMessage = `Error during edit: ${err.status} - ${err.message}`;
+          },
+        });
+  }
   }
 }
