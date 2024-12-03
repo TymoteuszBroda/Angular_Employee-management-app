@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Employee } from '../../models/employee';
 import { EmployeeService } from '../employee.service';
 import { ResourceLoader } from '@angular/compiler';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-employee-form',
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './employee-form.component.html',
   styleUrl: './employee-form.component.css'
 })
-export class EmployeeFormComponent {
+export class EmployeeFormComponent  implements OnInit{
 
   employee: Employee = {
     id: 0,
@@ -23,11 +23,26 @@ export class EmployeeFormComponent {
     position: ''
   }
 
+  isEditing : boolean = false;
+
   errorMessage = "";
 
-constructor(private employeeService: EmployeeService, private router : Router)
+constructor(private employeeService: EmployeeService,
+  private router : Router,
+  private route : ActivatedRoute)
 {
 
+}
+ngOnInit(): void {
+  this.route.paramMap.subscribe((result) => {
+    result.get('id');
+    const id = result.get('id');
+
+    if(id)
+    {
+      this.isEditing = true;
+    }
+  })
 }
 
   onSubmit(): void
