@@ -41,6 +41,17 @@ ngOnInit(): void {
     if(id)
     {
       this.isEditing = true;
+      this.employeeService.getEmployeeById(parseInt(id))
+      .subscribe({
+        next: (result) =>
+        {
+          this.employee = result;
+        },
+        error: (err) =>
+        {
+          console.error("error loading employee", err);
+        }
+      });
     }
   })
 }
