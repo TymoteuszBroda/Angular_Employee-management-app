@@ -1,9 +1,6 @@
 <h2 class="text-center my-5">{{isEditing? 'Edit' : 'Create'}} Employee</h2>
-<div *ngIf="errorMessage != ''">
-  {{errorMessage}}
-</div>
 
-<form (ngSubmit)="onSubmit()" class="border rounded p-5 w-50 mx-auto">
+<form (ngSubmit)="onSubmit()" #employeeForm="ngForm" class="border rounded p-5 w-50 mx-auto">
     <div class="mb-3">
       <label class="form-label">First name*</label>
       <input required #firstName="ngModel" class="form-control" type="text" name="firstName" [(ngModel)]="employee.firstName"/>
@@ -39,5 +36,5 @@
         <div class="text-danger" *ngIf="position.errors?.['required']">Position is required</div>
       </div>
     </div>
-    <button class="btn btn-primary btn-lg" type="submit">{{isEditing? 'Edit' : 'Create'}}</button>
+    <button class="btn btn-primary btn-lg" type="submit" [disabled]="employeeForm.invalid">{{isEditing? 'Edit' : 'Create'}}</button>
 </form>
